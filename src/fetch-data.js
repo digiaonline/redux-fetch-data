@@ -35,7 +35,7 @@ export class FetchData extends Component {
 
 FetchData.propTypes = {
   isFetched: PropTypes.bool.isRequired,
-  actions: PropTypes.object.isRequired
+  actions: PropTypes.object
 };
 
 FetchData.defaultProps = {

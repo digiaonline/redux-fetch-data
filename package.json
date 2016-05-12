@@ -70,7 +70,11 @@
     "jsdom": "^9.0.0",
     "mocha": "^2.4.5",
     "react": "^15.0.2",
-    "react-dom": "^15.0.2"
+    "react-dom": "^15.0.2",
+    "sinon": "^1.17.4",
+    "sinon-chai": "^2.8.0"
   },
-  "dependencies": {}
+  "dependencies": {
+    "redux-actions": "^0.9.1"
+  }
 }
