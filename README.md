@@ -44,7 +44,7 @@ function renderHtml(html) {
     <html>
       <body>
         <div id="root">${html}</div>
-        <script dangerouslySetInnerHTML={{__html: `window.__INITIAL_STATE__=${JSON.parse(store.getState())};`}}
+        <script dangerouslySetInnerHTML={{__html: `window.__INITIAL_STATE__=${JSON.stringify(store.getState())};`}}
                 charSet="UTF-8"/>
       </body>
     </html>
