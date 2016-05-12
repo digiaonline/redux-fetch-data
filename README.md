@@ -115,7 +115,7 @@ render(
 ### Fetching data
 
 Instead of loading data in `componentWillMount`, move that logic to a static `fetchData` method.
-This method should return a promise. Make sure you only fetch data from your containers
+This method should return a promise. Also, make sure you only fetch data from your containers
 (top-level components), and pass down the data as props to sub-components.
 
 ```js
