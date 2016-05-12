@@ -6,6 +6,7 @@
 [![npm version](https://img.shields.io/npm/v/redux-fetch-data.svg)](https://www.npmjs.com/package/redux-fetch-data)
 [![npm downloads](https://img.shields.io/npm/dt/redux-fetch-data.svg)](https://www.npmjs.com/package/redux-fetch-data)
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/nordsoftware/redux-fetch-data/master/LICENSE)
+[![Gitter](https://img.shields.io/gitter/room/norsoftware/open-source.svg?maxAge=2592000)](https://gitter.im/nordsoftware/open-source)
 
 Redux utility library for fetching data using promises on both server and client.
 
