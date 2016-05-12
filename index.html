@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Redux-fetch-data by nordsoftware</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">Redux-fetch-data</h1>
+      <h2 class="project-tagline">Redux utility library for fetching data using promises on both server and client.</h2>
+      <a href="https://github.com/nordsoftware/redux-fetch-data" class="btn">View on GitHub</a>
+      <a href="https://github.com/nordsoftware/redux-fetch-data/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/nordsoftware/redux-fetch-data/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <h1>
+<a id="redux-fetch-data" class="anchor" href="#redux-fetch-data" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>redux-fetch-data</h1>
+
+<p><a href="https://travis-ci.org/nordsoftware/redux-fetch-data"><img src="https://travis-ci.org/nordsoftware/redux-fetch-data.svg?branch=develop" alt="Build Status"></a>
+<a href="https://codeclimate.com/github/nordsoftware/redux-fetch-data/coverage"><img src="https://codeclimate.com/github/nordsoftware/redux-fetch-data/badges/coverage.svg" alt="Test Coverage"></a>
+<a href="https://codeclimate.com/github/nordsoftware/redux-fetch-data"><img src="https://codeclimate.com/github/nordsoftware/redux-fetch-data/badges/gpa.svg" alt="Code Climate"></a>
+<a href="https://www.npmjs.com/package/redux-fetch-data"><img src="https://img.shields.io/npm/v/redux-fetch-data.svg" alt="npm version"></a>
+<a href="https://www.npmjs.com/package/redux-fetch-data"><img src="https://img.shields.io/npm/dt/redux-fetch-data.svg" alt="npm downloads"></a>
+<a href="https://raw.githubusercontent.com/nordsoftware/redux-fetch-data/master/LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="GitHub license"></a></p>
+
+<p>Redux utility library for fetching data using promises on both server and client.</p>
+
+<h2>
+<a id="install" class="anchor" href="#install" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Install</h2>
+
+<div class="highlight highlight-source-shell"><pre>npm install redux-fetch-data --save</pre></div>
+
+<h2>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Usage</h2>
+
+<h3>
+<a id="initial-setup" class="anchor" href="#initial-setup" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Initial setup</h3>
+
+<h4>
+<a id="on-the-server" class="anchor" href="#on-the-server" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>On the server</h4>
+
+<p>Here is an example setup of a simple server. In this example we used Express, but any server framework will do.</p>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-k">import</span> <span class="pl-smi">Express</span> <span class="pl-k">from</span> <span class="pl-s"><span class="pl-pds">'</span>express<span class="pl-pds">'</span></span>;
+<span class="pl-k">import</span> <span class="pl-smi">React</span> <span class="pl-k">from</span> <span class="pl-s"><span class="pl-pds">'</span>react<span class="pl-pds">'</span></span>;
+<span class="pl-k">import</span> { <span class="pl-smi">renderToString</span> } <span class="pl-k">from</span> <span class="pl-s"><span class="pl-pds">'</span>react-dom/server<span class="pl-pds">'</span></span>;
+<span class="pl-k">import</span> { <span class="pl-smi">match</span>, <span class="pl-smi">RouterContext</span> } <span class="pl-k">from</span> <span class="pl-s"><span class="pl-pds">'</span>react-router<span class="pl-pds">'</span></span>;
+<span class="pl-k">import</span> { <span class="pl-smi">createStore</span>, <span class="pl-smi">combineReducers</span> } <span class="pl-k">from</span> <span class="pl-s"><span class="pl-pds">'</span>redux<span class="pl-pds">'</span></span>;
+<span class="pl-k">import</span> { <span class="pl-smi">Provider</span> } <span class="pl-k">from</span> <span class="pl-s"><span class="pl-pds">'</span>react-redux<span class="pl-pds">'</span></span>;
+<span class="pl-k">import</span> { <span class="pl-smi">fetchDataOnServer</span>, <span class="pl-smi">reducer</span> <span class="pl-k">as</span> <span class="pl-smi">fetching</span> } <span class="pl-k">from</span> <span class="pl-s"><span class="pl-pds">'</span>redux-fetch-data<span class="pl-pds">'</span></span>;
+<span class="pl-k">import</span> <span class="pl-smi">createHistory</span> <span class="pl-k">from</span> <span class="pl-s"><span class="pl-pds">'</span>react-router/lib/createMemoryHistory<span class="pl-pds">'</span></span>;
+
+<span class="pl-k">import</span> <span class="pl-smi">routes</span> <span class="pl-k">from</span> <span class="pl-s"><span class="pl-pds">'</span>../../routes<span class="pl-pds">'</span></span>;
+
+<span class="pl-k">const</span> <span class="pl-c1">app</span> <span class="pl-k">=</span> <span class="pl-en">Express</span>();
+
+<span class="pl-c">// Renders the actual HTML page</span>
+<span class="pl-k">function</span> <span class="pl-en">renderHtml</span>(<span class="pl-smi">html</span>, <span class="pl-smi">state</span>) {
+  <span class="pl-k">return</span> <span class="pl-s"><span class="pl-pds">`</span></span>
+<span class="pl-s">    &lt;!doctype html&gt;</span>
+<span class="pl-s">    &lt;html&gt;</span>
+<span class="pl-s">      &lt;body&gt;</span>
+<span class="pl-s">        &lt;div id="root"&gt;<span class="pl-s1"><span class="pl-pse">${</span>html<span class="pl-pse">}</span></span>&lt;/div&gt;</span>
+<span class="pl-s">        &lt;script dangerouslySetInnerHTML={{__html: <span class="pl-pds">`</span></span><span class="pl-c1">window</span>.<span class="pl-smi">__INITIAL_STATE__</span><span class="pl-k">=</span>${<span class="pl-c1">JSON</span>.<span class="pl-en">stringify</span>(state)};<span class="pl-s"><span class="pl-pds">`</span>}}</span>
+<span class="pl-s">                charSet="UTF-8"/&gt;</span>
+<span class="pl-s">      &lt;/body&gt;</span>
+<span class="pl-s">    &lt;/html&gt;</span>
+<span class="pl-s">  <span class="pl-pds">`</span></span>;
+}
+
+<span class="pl-c">// Register the rendering middleware</span>
+<span class="pl-smi">app</span>.<span class="pl-en">use</span>((<span class="pl-smi">req</span>, <span class="pl-smi">res</span>) <span class="pl-k">=&gt;</span> {
+  <span class="pl-k">const</span> <span class="pl-c1">history</span> <span class="pl-k">=</span> <span class="pl-en">createHistory</span>(<span class="pl-smi">req</span>.<span class="pl-smi">originalUrl</span>);
+  <span class="pl-k">const</span> <span class="pl-c1">store</span> <span class="pl-k">=</span> <span class="pl-en">createStore</span>(<span class="pl-en">combineReducers</span>({ fetching }));
+
+  <span class="pl-en">match</span>({ routes, location<span class="pl-k">:</span> <span class="pl-smi">req</span>.<span class="pl-smi">url</span> }, (<span class="pl-smi">err</span>, <span class="pl-smi">redirect</span>, <span class="pl-smi">renderProps</span>) <span class="pl-k">=&gt;</span> {
+    <span class="pl-c">// Fetch data</span>
+    <span class="pl-en">fetchDataOnServer</span>(renderProps, store).<span class="pl-en">then</span>(() <span class="pl-k">=&gt;</span> {
+      <span class="pl-c">// Data has been fetched, resolve request</span>
+      <span class="pl-k">if</span> (err) {
+        <span class="pl-smi">res</span>.<span class="pl-c1">status</span>(<span class="pl-c1">500</span>).<span class="pl-c1">send</span>(<span class="pl-smi">err</span>.<span class="pl-smi">message</span>);
+      } <span class="pl-k">else</span> <span class="pl-k">if</span> (redirect) {
+        <span class="pl-smi">res</span>.<span class="pl-en">redirect</span>(<span class="pl-smi">redirect</span>.<span class="pl-c1">pathname</span> <span class="pl-k">+</span> <span class="pl-smi">redirect</span>.<span class="pl-smi">search</span>);
+      } <span class="pl-k">else</span> <span class="pl-k">if</span> (renderProps) {
+        <span class="pl-c">// Render the root component</span>
+        <span class="pl-k">const</span> <span class="pl-c1">html</span> <span class="pl-k">=</span> <span class="pl-en">renderToString</span>((
+          <span class="pl-k">&lt;</span>Provider store<span class="pl-k">=</span>{store} key<span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>provider<span class="pl-pds">"</span></span><span class="pl-k">&gt;</span>
+            <span class="pl-k">&lt;</span>RouterContext {<span class="pl-k">...</span>renderProps}<span class="pl-k">/</span><span class="pl-k">&gt;</span>
+          <span class="pl-k">&lt;</span><span class="pl-k">/</span>Provider<span class="pl-k">&gt;</span>
+        ));
+
+        <span class="pl-c">// Send the rendered page back to the client</span>
+        <span class="pl-smi">res</span>.<span class="pl-c1">status</span>(<span class="pl-c1">200</span>).<span class="pl-c1">send</span>(<span class="pl-en">render</span>(html, <span class="pl-smi">store</span>.<span class="pl-en">getState</span>()));
+      } <span class="pl-k">else</span> {
+        <span class="pl-smi">res</span>.<span class="pl-c1">status</span>(<span class="pl-c1">404</span>).<span class="pl-c1">send</span>(<span class="pl-s"><span class="pl-pds">'</span>Not found.<span class="pl-pds">'</span></span>);
+      }
+    });
+  });
+});
+
+<span class="pl-smi">app</span>.<span class="pl-en">listen</span>(<span class="pl-c1">3000</span>);</pre></div>
+
+<h4>
+<a id="on-the-client" class="anchor" href="#on-the-client" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>On the client</h4>
+
+<p>Here is an example of an client-side entry script.</p>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-k">import</span> <span class="pl-smi">React</span> <span class="pl-k">from</span> <span class="pl-s"><span class="pl-pds">'</span>react<span class="pl-pds">'</span></span>;
+<span class="pl-k">import</span> { <span class="pl-smi">createStore</span>, <span class="pl-smi">combineReducers</span> } <span class="pl-k">from</span> <span class="pl-s"><span class="pl-pds">'</span>redux<span class="pl-pds">'</span></span>;
+<span class="pl-k">import</span> { <span class="pl-smi">render</span> } <span class="pl-k">from</span> <span class="pl-s"><span class="pl-pds">'</span>react-dom<span class="pl-pds">'</span></span>;
+<span class="pl-k">import</span> { <span class="pl-smi">Router</span>, <span class="pl-smi">browserHistory</span> } <span class="pl-k">from</span> <span class="pl-s"><span class="pl-pds">'</span>react-router<span class="pl-pds">'</span></span>;
+<span class="pl-k">import</span> { <span class="pl-smi">Provider</span> } <span class="pl-k">from</span> <span class="pl-s"><span class="pl-pds">'</span>react-redux<span class="pl-pds">'</span></span>;
+<span class="pl-k">import</span> { <span class="pl-smi">FetchData</span>, <span class="pl-smi">reducer</span> <span class="pl-k">as</span> <span class="pl-smi">fetching</span> } <span class="pl-k">from</span> <span class="pl-s"><span class="pl-pds">'</span>redux-fetch-data<span class="pl-pds">'</span></span>;
+
+<span class="pl-k">import</span> <span class="pl-smi">routes</span> <span class="pl-k">from</span> <span class="pl-s"><span class="pl-pds">'</span>./routes<span class="pl-pds">'</span></span>;
+
+<span class="pl-c">// Hydrate the initial state from the server state</span>
+<span class="pl-k">const</span> <span class="pl-c1">initialState</span> <span class="pl-k">=</span> <span class="pl-c1">window</span>.<span class="pl-smi">__INITIAL_STATE__</span>;
+<span class="pl-k">const</span> <span class="pl-c1">store</span> <span class="pl-k">=</span> <span class="pl-en">createStore</span>(<span class="pl-en">combineReducers</span>({ fetching }), initialState);
+
+<span class="pl-en">render</span>(
+  <span class="pl-k">&lt;</span>Provider store<span class="pl-k">=</span>{store} key<span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>provider<span class="pl-pds">"</span></span><span class="pl-k">&gt;</span>
+    <span class="pl-k">&lt;</span>Router render<span class="pl-k">=</span>{<span class="pl-smi">props</span> <span class="pl-k">=&gt;</span> <span class="pl-k">&lt;</span>FetchData {<span class="pl-k">...</span>props}<span class="pl-k">/</span><span class="pl-k">&gt;</span>}
+            history<span class="pl-k">=</span>{browserHistory}
+            routes<span class="pl-k">=</span>{routes}<span class="pl-k">/</span><span class="pl-k">&gt;</span>
+  <span class="pl-k">&lt;</span><span class="pl-k">/</span>Provider<span class="pl-k">&gt;</span>,
+  <span class="pl-c1">document</span>.<span class="pl-c1">getElementById</span>(<span class="pl-s"><span class="pl-pds">'</span>root<span class="pl-pds">'</span></span>)
+);</pre></div>
+
+<h3>
+<a id="fetching-data" class="anchor" href="#fetching-data" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Fetching data</h3>
+
+<p>Instead of loading data in <code>componentWillMount</code>, move that logic to a static <code>fetchData</code> method.
+This method should return a promise. Also, make sure you only fetch data from your containers
+(top-level components), and pass down the data as props to sub-components.</p>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-k">export</span> <span class="pl-k">class</span> <span class="pl-en">Foo</span> <span class="pl-k">extends</span> <span class="pl-e">Component</span> {
+  <span class="pl-k">static</span> <span class="pl-en">fetchData</span>() {
+    <span class="pl-c">// this method should return a promise</span>
+  }
+  <span class="pl-k">...</span>..
+}</pre></div>
+
+<p><strong>Protip!</strong> You can use <code>Promise.all</code> to combine multiple promises into one.</p>
+
+<h2>
+<a id="tests" class="anchor" href="#tests" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Tests</h2>
+
+<p>Run the test suite:</p>
+
+<div class="highlight highlight-source-shell"><pre>npm <span class="pl-c1">test</span></pre></div>
+
+<p>Run the test suite in watch mode:</p>
+
+<div class="highlight highlight-source-shell"><pre>npm run <span class="pl-c1">test</span>:watch <span class="pl-k">&lt;</span>path<span class="pl-k">&gt;</span></pre></div>
+
+<p>Generate the code coverage report:</p>
+
+<div class="highlight highlight-source-shell"><pre>npm run <span class="pl-c1">test</span>:cover</pre></div>
+
+<h2>
+<a id="license" class="anchor" href="#license" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>License</h2>
+
+<p>See <a href="LICENSE">LICENSE</a>.</p>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/nordsoftware/redux-fetch-data">Redux-fetch-data</a> is maintained by <a href="https://github.com/nordsoftware">nordsoftware</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
+  </body>
+</html>
