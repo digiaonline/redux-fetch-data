@@ -1,6 +1,6 @@
 {
   "name": "redux-fetch-data",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Redux utility library for fetching data using promises on both server and client.",
   "main": "lib/index.js",
   "jsnext:main": "src/index.js",

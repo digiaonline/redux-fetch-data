@@ -38,13 +38,13 @@ import routes from '../../routes';
 const app = Express();
 
 // Renders the actual HTML page
-function renderHtml(html) {
+function renderHtml(html, state) {
   return `
     <!doctype html>
     <html>
       <body>
         <div id="root">${html}</div>
-        <script dangerouslySetInnerHTML={{__html: `window.__INITIAL_STATE__=${JSON.stringify(store.getState())};`}}
+        <script dangerouslySetInnerHTML={{__html: `window.__INITIAL_STATE__=${JSON.stringify(state)};`}}
                 charSet="UTF-8"/>
       </body>
     </html>
@@ -73,7 +73,7 @@ app.use((req, res) => {
         ));
 
         // Send the rendered page back to the client
-        res.status(200).send(render(html));
+        res.status(200).send(render(html, store.getState()));
       } else {
         res.status(404).send('Not found.');
       }
