@@ -74,7 +74,7 @@ app.use((req, res) => {
         ));
 
         // Send the rendered page back to the client
-        res.status(200).send(render(html, store.getState()));
+        res.status(200).send(renderHtml(html, store.getState()));
       } else {
         res.status(404).send('Not found.');
       }
