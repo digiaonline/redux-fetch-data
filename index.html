@@ -24,7 +24,8 @@
 <a href="https://codeclimate.com/github/nordsoftware/redux-fetch-data"><img src="https://codeclimate.com/github/nordsoftware/redux-fetch-data/badges/gpa.svg" alt="Code Climate"></a>
 <a href="https://www.npmjs.com/package/redux-fetch-data"><img src="https://img.shields.io/npm/v/redux-fetch-data.svg" alt="npm version"></a>
 <a href="https://www.npmjs.com/package/redux-fetch-data"><img src="https://img.shields.io/npm/dt/redux-fetch-data.svg" alt="npm downloads"></a>
-<a href="https://raw.githubusercontent.com/nordsoftware/redux-fetch-data/master/LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="GitHub license"></a></p>
+<a href="https://raw.githubusercontent.com/nordsoftware/redux-fetch-data/master/LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="License"></a>
+<a href="https://gitter.im/nordsoftware/open-source"><img src="https://img.shields.io/gitter/room/norsoftware/open-source.svg?maxAge=2592000" alt="Gitter"></a></p>
 
 <h2>
 <a id="install" class="anchor" href="#install" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Install</h2>
@@ -91,7 +92,7 @@
         ));
 
         <span class="pl-c">// Send the rendered page back to the client</span>
-        <span class="pl-smi">res</span>.<span class="pl-c1">status</span>(<span class="pl-c1">200</span>).<span class="pl-c1">send</span>(<span class="pl-en">render</span>(html, <span class="pl-smi">store</span>.<span class="pl-en">getState</span>()));
+        <span class="pl-smi">res</span>.<span class="pl-c1">status</span>(<span class="pl-c1">200</span>).<span class="pl-c1">send</span>(<span class="pl-en">renderHtml</span>(html, <span class="pl-smi">store</span>.<span class="pl-en">getState</span>()));
       } <span class="pl-k">else</span> {
         <span class="pl-smi">res</span>.<span class="pl-c1">status</span>(<span class="pl-c1">404</span>).<span class="pl-c1">send</span>(<span class="pl-s"><span class="pl-pds">'</span>Not found.<span class="pl-pds">'</span></span>);
       }
@@ -104,7 +105,7 @@
 <h4>
 <a id="on-the-client" class="anchor" href="#on-the-client" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>On the client</h4>
 
-<p>Here is an example of an client-side entry script.</p>
+<p>Here is an example of a client-side entry script.</p>
 
 <div class="highlight highlight-source-js"><pre><span class="pl-k">import</span> <span class="pl-smi">React</span> <span class="pl-k">from</span> <span class="pl-s"><span class="pl-pds">'</span>react<span class="pl-pds">'</span></span>;
 <span class="pl-k">import</span> { <span class="pl-smi">createStore</span>, <span class="pl-smi">combineReducers</span> } <span class="pl-k">from</span> <span class="pl-s"><span class="pl-pds">'</span>redux<span class="pl-pds">'</span></span>;
