@@ -41,6 +41,14 @@ describe('Utility functions', () => {
         done();
       });
     });
+
+    it('does not crash on undefined components', done => {
+      const store = makeStore();
+      fetchDataOnServer({ components: [undefined] }, store).then(() => {
+        expect(store.getState().fetched).to.be.true;
+        done();
+      });
+    });
   });
 
 });

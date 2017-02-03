@@ -11,7 +11,7 @@ import { doneFetching } from './module';
  */
 export function grabPromises(components, params, store) {
   return flattenComponents(components)
-    .filter(component => component.fetchData instanceof Function)
+    .filter(component => component && component.fetchData instanceof Function)
     .map(component => component.fetchData(store, params));
 }
 
