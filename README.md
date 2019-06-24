@@ -1,6 +1,6 @@
 # redux-fetch-data
 
-[![Build Status](https://travis-ci.org/digiaonline/redux-fetch-data.svg?branch=develop)](https://travis-ci.org/digiaonline/redux-fetch-data)
+[![Build Status](https://travis-ci.org/digiaonline/redux-fetch-data.svg?branch=master)](https://travis-ci.org/digiaonline/redux-fetch-data)
 [![Test Coverage](https://codeclimate.com/github/nordsoftware/redux-fetch-data/badges/coverage.svg)](https://codeclimate.com/github/nordsoftware/redux-fetch-data/coverage)
 [![Code Climate](https://codeclimate.com/github/nordsoftware/redux-fetch-data/badges/gpa.svg)](https://codeclimate.com/github/nordsoftware/redux-fetch-data)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/nordsoftware/redux-fetch-data/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/nordsoftware/redux-fetch-data/?branch=master)
