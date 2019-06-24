@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/digiaonline/redux-fetch-data.svg?branch=master)](https://travis-ci.org/digiaonline/redux-fetch-data)
 [![Test Coverage](https://codeclimate.com/github/digiaonline/redux-fetch-data/badges/coverage.svg)](https://codeclimate.com/github/digiaonline/redux-fetch-data/coverage)
 [![Code Climate](https://codeclimate.com/github/digiaonline/redux-fetch-data/badges/gpa.svg)](https://codeclimate.com/github/digiaonline/redux-fetch-data)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/nordsoftware/redux-fetch-data/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/nordsoftware/redux-fetch-data/?branch=master)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/digiaonline/redux-fetch-data/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/digiaonline/redux-fetch-data/?branch=master)
 [![StyleCI](https://styleci.io/repos/58546352/shield?style=flat)](https://styleci.io/repos/58546352)
 [![npm version](https://img.shields.io/npm/v/redux-fetch-data.svg)](https://www.npmjs.com/package/redux-fetch-data)
 [![npm downloads](https://img.shields.io/npm/dt/redux-fetch-data.svg)](https://www.npmjs.com/package/redux-fetch-data)
