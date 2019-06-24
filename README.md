@@ -1,14 +1,13 @@
 # redux-fetch-data
 
-[![Build Status](https://travis-ci.org/nordsoftware/redux-fetch-data.svg?branch=develop)](https://travis-ci.org/nordsoftware/redux-fetch-data)
+[![Build Status](https://travis-ci.org/digiaonline/redux-fetch-data.svg?branch=develop)](https://travis-ci.org/digiaonline/redux-fetch-data)
 [![Test Coverage](https://codeclimate.com/github/nordsoftware/redux-fetch-data/badges/coverage.svg)](https://codeclimate.com/github/nordsoftware/redux-fetch-data/coverage)
 [![Code Climate](https://codeclimate.com/github/nordsoftware/redux-fetch-data/badges/gpa.svg)](https://codeclimate.com/github/nordsoftware/redux-fetch-data)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/nordsoftware/redux-fetch-data/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/nordsoftware/redux-fetch-data/?branch=master)
 [![StyleCI](https://styleci.io/repos/58546352/shield?style=flat)](https://styleci.io/repos/58546352)
 [![npm version](https://img.shields.io/npm/v/redux-fetch-data.svg)](https://www.npmjs.com/package/redux-fetch-data)
 [![npm downloads](https://img.shields.io/npm/dt/redux-fetch-data.svg)](https://www.npmjs.com/package/redux-fetch-data)
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/nordsoftware/redux-fetch-data/master/LICENSE)
-[![Gitter](https://img.shields.io/gitter/room/norsoftware/open-source.svg?maxAge=2592000)](https://gitter.im/nordsoftware/open-source)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/digiaonline/redux-fetch-data/master/LICENSE)
 
 Redux utility library for fetching data using promises on both server and client.
 
